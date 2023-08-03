@@ -28,10 +28,9 @@ const CampaignDetails = () => {
     if(contract) fetchDonators();
   }, [contract, address])
 
-
-
   const handleDonate = async () => {
     setIsLoading(true);
+    console.log(amount);
     await donate(state.pId,amount);
     setIsLoading(false);
   }
