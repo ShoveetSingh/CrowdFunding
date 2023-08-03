@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {useLocation} from 'react-router-dom';
 import {useStateContext} from '../context';
 import {ethers} from 'ethers';
-import { CustomButton } from '../components';
+import { CustomButton,Loader } from '../components';
 import { calculateBarPercentage } from '../utils';
 import { thirdweb } from '../assets';
 import { daysLeft } from '../utils';
@@ -38,7 +38,7 @@ const CampaignDetails = () => {
 
   return (
     <div>
-      {isLoading && 'Loading...'}
+      {isLoading && <Loader/>}
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
           <img src={state.image} alt="campaign" className="w-full h-[400px] object-cover rounded-xl" />
@@ -76,9 +76,10 @@ const CampaignDetails = () => {
           <h4 className=" font-epilogue font-semibold text-[18px] text-white truncate">Donators</h4>
           <div className="mt-[20px] flex flex-col gap-4">
           {donators.length>0? donators.map((item,index)=>(
-            <div>
-            Donators
-            </div>
+            <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
+                    <p className="font-epilogue font-normal text-[16px] text-[yellow] leading-[26px] break-ll">{index + 1}. {item.donator}</p>
+                    <p className="font-epilogue font-normal text-[16px] text-[yellow] leading-[26px] break-ll">{item.donation}</p>
+                  </div>
           )):(
             <p className="font-epilogue font-normal text-[16px] text-[#808191] leading-[26px] text-justify">No donators yet Be the first one!</p>
           )}
